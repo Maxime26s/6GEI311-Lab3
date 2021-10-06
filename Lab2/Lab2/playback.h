@@ -7,6 +7,7 @@ enum PlaybackState
     STATE_NO_GRAPH,
     STATE_RUNNING,
     STATE_PAUSED,
+    STATE_STOPPED
 };
 
 class DShowPlayer

@@ -1,29 +1,71 @@
 import Lab3
 import threading
+import tkinter as tk
+from tkinter.filedialog import askopenfilename
 
-# Gère et envoie les entrées clavier
-def keyboard_manager():
-    while True:
-        char = str(input()).lower()
-        if len(char) != 0:
-            Lab3.sendInput(char[0])
+def init_app():
+    root = tk.Tk()
+    app = Application(master=root)
+    app.mainloop()
 
-            if char == 'q':
-                break
+
 
 # Initialise les threads du clavier et de la vidéo
 def main():
-    print("Entrer dans la console le path de la vidéo ou appuyer sur ENTER pour la vidéo par défaut")
-    path = str(input())
-    print("Entrer dans la console les touches du clavier.\nP - Play ou pause la vidéo.\nA - Accélère la vidéo x1 -> x1.5 -> x2 puis reset à x1.\nR - Retourne au début de la vidéo.\nQ - Quitte le programme.")
-    threadKeyboard = threading.Thread(target=keyboard_manager)
+    path = ""
+    #init_app()
+    
+    #path = ""
+
+    #threadApp = threading.Thread(target=init_app)
     threadVideo = threading.Thread(target=Lab3.initPlayer, args=["..\\Example.avi" if len(path) == 0 else path])
 
-    threadKeyboard.start()
+    #threadApp.start()
     threadVideo.start()
 
-    threadKeyboard.join()
+    #threadApp.join()
     threadVideo.join()
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.play = tk.Button(self)
+        self.play["text"] = "Play/Pause"
+        self.play["command"] = lambda: Lab3.sendInput("p")
+        self.play.pack(side="top")
+
+        self.rate = tk.Button(self)
+        self.rate["text"] = "Change rate"
+        self.rate["command"] = lambda: Lab3.sendInput("a")
+        self.rate.pack(side="top")
+
+
+        self.back = tk.Button(self)
+        self.back["text"] = "Back"
+        self.back["command"] = lambda: Lab3.sendInput("r")
+        self.back.pack(side="top")
+
+        self.selectFile = tk.Button(self)
+        self.selectFile["text"] = "Select file"
+        self.selectFile["command"] = self.select_file
+        self.selectFile.pack(side="top")
+
+        self.quit = tk.Button(self, text="Quit", fg="red",
+                              command=self.quit)
+        self.quit.pack(side="bottom")
+
+    def select_file(self):
+        filename = askopenfilename()
+        Lab3.setFile(filename)
+
+    def quit(self):
+        Lab3.sendInput("q")
+        self.master.destroy()
 
 if __name__ == "__main__":
     main()

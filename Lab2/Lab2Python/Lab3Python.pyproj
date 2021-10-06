@@ -5,7 +5,7 @@
     <ProjectGuid>93b795be-ee41-4a76-b91b-15463e32e75b</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Lab2Python.py</StartupFile>
+    <StartupFile>Lab3Python.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Lab2Python.py" />
+    <Compile Include="Lab3Python.py" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lab2\Lab2.vcxproj">

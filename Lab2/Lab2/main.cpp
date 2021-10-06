@@ -6,7 +6,8 @@
 DShowPlayer* g_pPlayer = NULL;
 
 // Gère les entrées claviers reçues
-void ManageInput(char ch) {
+void ManageInput(char ch)
+{
 	switch (ch)
 	{
 	case L'p':
@@ -36,6 +37,16 @@ void ManageInput(char ch) {
 	}
 }
 
+static PyObject* setFile(PyObject* self, PyObject* args)
+{
+	//delete g_pPlayer;
+	//g_pPlayer = new (std::nothrow) DShowPlayer(PyUnicode_AsUTF8(args));
+	//g_pPlayer->Pause();
+	PyObject* python_val = Py_BuildValue("");
+
+	return python_val;
+}
+
 // Fonction python pour initialiser la vidéo
 static PyObject* initPlayer(PyObject* self, PyObject* args)
 {
@@ -56,14 +67,17 @@ static PyObject* sendInput(PyObject* self, PyObject* args)
 }
 
 // Définition des fonctions de la librairie
-static PyMethodDef VideoPlayerMethods[] = {
+static PyMethodDef VideoPlayerMethods[] =
+{
 	{"initPlayer", (PyCFunction)initPlayer, METH_O, "Shows the video player."},
 	{"sendInput", (PyCFunction)sendInput, METH_O, "Sends input to the video player."},
+	{"setFile", (PyCFunction)setFile, METH_O, "Sets the video file used by the video player."},
 	{nullptr, nullptr, 0, nullptr}        /* Sentinel */
 };
 
 // Définition du module
-static struct PyModuleDef videoplayermodule = {
+static struct PyModuleDef videoplayermodule =
+{
 	PyModuleDef_HEAD_INIT,
 	"Lab3",   /* name of module */
 	nullptr, /* module documentation, may be NULL */

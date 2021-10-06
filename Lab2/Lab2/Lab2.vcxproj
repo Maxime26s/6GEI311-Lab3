@@ -29,7 +29,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{1aed7dd5-e121-42e7-bc12-bffd4f269523}</ProjectGuid>
-    <RootNamespace>Lab2</RootNamespace>
+    <RootNamespace>Lab3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Lab3</ProjectName>
   </PropertyGroup>
