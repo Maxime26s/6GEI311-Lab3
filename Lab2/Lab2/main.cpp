@@ -32,16 +32,22 @@ void ManageInput(char ch)
 	case L'q':
 	case L'Q':
 		delete g_pPlayer;
+		g_pPlayer == NULL;
 		exit(0);
+		break;
+	case L'c':
+	case L'C':
+		delete g_pPlayer;
+		g_pPlayer == NULL;
 		break;
 	}
 }
 
 static PyObject* setFile(PyObject* self, PyObject* args)
 {
-	//delete g_pPlayer;
-	//g_pPlayer = new (std::nothrow) DShowPlayer(PyUnicode_AsUTF8(args));
-	//g_pPlayer->Pause();
+	delete g_pPlayer;
+	g_pPlayer = new (std::nothrow) DShowPlayer(PyUnicode_AsUTF8(args));
+	g_pPlayer->Pause();
 	PyObject* python_val = Py_BuildValue("");
 
 	return python_val;
@@ -60,7 +66,8 @@ static PyObject* initPlayer(PyObject* self, PyObject* args)
 // Fonction python pour envoyer les entrées claviers
 static PyObject* sendInput(PyObject* self, PyObject* args)
 {
-	ManageInput(*PyUnicode_AsUTF8(args));
+	if(g_pPlayer != NULL)
+		ManageInput(*PyUnicode_AsUTF8(args));
 	PyObject* python_val = Py_BuildValue("");
 
 	return python_val;
