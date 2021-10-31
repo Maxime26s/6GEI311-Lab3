@@ -9,8 +9,10 @@ def init_app():
     app = Application(master=root)
     app.mainloop()
 
+
 def main():
     init_app()
+
 
 # Classe contenant l'application (tkinter)
 class Application(tk.Frame):
@@ -34,7 +36,6 @@ class Application(tk.Frame):
         self.rate["command"] = lambda: Lab3.sendInput("a")
         self.rate.pack(side="top")
 
-
         self.back = tk.Button(self)
         self.back["text"] = "Back"
         self.back["command"] = lambda: Lab3.sendInput("r")
@@ -50,8 +51,7 @@ class Application(tk.Frame):
         self.closePlayer["command"] = lambda: Lab3.sendInput("c")
         self.closePlayer.pack(side="top")
 
-        self.quit = tk.Button(self, text="Quit", fg="red",
-                              command=self.quit)
+        self.quit = tk.Button(self, text="Quit", fg="red", command=self.quit)
         self.quit.pack(side="bottom")
 
     # Fonction de sélection de fichier
@@ -63,6 +63,7 @@ class Application(tk.Frame):
     def quit(self):
         Lab3.sendInput("q")
         self.master.destroy()
+
 
 if __name__ == "__main__":
     main()
